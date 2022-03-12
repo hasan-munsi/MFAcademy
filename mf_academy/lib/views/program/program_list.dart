@@ -18,7 +18,8 @@ class _ProgramListState extends State<ProgramList> {
   bool _init = true;
   int page = 1;
   bool _noMoreData = false;
-  final ProgramPreviewController _programPreviewController = ProgramPreviewController();
+  final ProgramPreviewController _programPreviewController =
+      ProgramPreviewController();
   final List<ProgramPreview> _programs = [];
 
   final ScrollController _scrollController = ScrollController();
@@ -27,7 +28,8 @@ class _ProgramListState extends State<ProgramList> {
   void initState() {
     _scrollController.addListener(() {
       if (!_init && !_noMoreData) {
-        if (_scrollController.position.pixels > _scrollController.position.maxScrollExtent - 200) {
+        if (_scrollController.position.pixels >
+            _scrollController.position.maxScrollExtent - 200) {
           setState(() {
             _init = true;
           });
@@ -41,7 +43,8 @@ class _ProgramListState extends State<ProgramList> {
   @override
   void didChangeDependencies() async {
     if (_init) {
-      final List<ProgramPreview> _tmp = await _programPreviewController.getPrograms(page);
+      final List<ProgramPreview> _tmp =
+          await _programPreviewController.getPrograms(page);
       if (_tmp.isEmpty) {
         _noMoreData = true;
       }
@@ -61,25 +64,46 @@ class _ProgramListState extends State<ProgramList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Xarvis.genericText(text: "Program List", textColor: Xarvis.appBgColor, fontSize: 20, fontWeight: FontWeight.bold),
+        title: Xarvis.genericText(
+            text: "Program List",
+            textColor: Xarvis.appBgColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
       ),
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ..._programs.map((e) => SingleProgramPreviewUI(program: e)),
-              if (_init)
-                const SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(),
-                ),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _init = true;
+          page = 1;
+          _noMoreData = false;
+          _programs.clear();
+          setState(() {});
+          didChangeDependencies();
+        },
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ..._programs.map((e) => SingleProgramPreviewUI(program: e)),
+                if (_init)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Xarvis.appBgColor,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
@@ -90,7 +114,8 @@ class _ProgramListState extends State<ProgramList> {
 class SingleProgramPreviewUI extends StatelessWidget {
   final ProgramPreview program;
 
-  const SingleProgramPreviewUI({Key? key, required this.program}) : super(key: key);
+  const SingleProgramPreviewUI({Key? key, required this.program})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +127,8 @@ class SingleProgramPreviewUI extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Xarvis.genericText(text: program.title, fontWeight: FontWeight.bold, maxLines: 2),
+            Xarvis.genericText(
+                text: program.title, fontWeight: FontWeight.bold, maxLines: 2),
             Xarvis.genericText(
               text: program.description,
               fontWeight: FontWeight.bold,
@@ -112,17 +138,18 @@ class SingleProgramPreviewUI extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Xarvis.genericText(text: "Date: ${program.date}", textColor: Xarvis.appBgColor),
+                Xarvis.genericText(
+                    text: "Date: ${program.date}",
+                    textColor: Xarvis.appBgColor),
                 Xarvis.getGlobalButton(
-                  action: () {
-                    Get.to(() => ProgramDetails(programId: program.id));
-                  },
-                  child: Xarvis.genericText(text: "Read More", textColor: Xarvis.fair),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: 10,
-                  ),
-                ),
+                    action: () {
+                      Get.to(() => ProgramDetails(programId: program.id));
+                    },
+                    height: 30,
+                    child: Xarvis.genericText(
+                        text: "Read more",
+                        textColor: Xarvis.fair,
+                        fontSize: 12))
               ],
             ),
           ],

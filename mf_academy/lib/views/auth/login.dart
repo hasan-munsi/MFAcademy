@@ -204,8 +204,9 @@ class LoginHelpingButtonsUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Xarvis.getGlobalButton(
       action: action,
+      height: 35,
       child: SizedBox(
-        height: 40,
+        height: 35,
         child: Row(
           children: [
             ClipRRect(
@@ -214,11 +215,12 @@ class LoginHelpingButtonsUI extends StatelessWidget {
                 imageUrl,
                 width: 25,
                 height: 25,
+                fit: BoxFit.cover,
               ),
             ),
             Xarvis.customWidth(5),
             Expanded(
-              child: Xarvis.genericText(text: label, textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 12, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
+              child: Xarvis.genericText(text: label, textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 10, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
             ),
           ],
         ),

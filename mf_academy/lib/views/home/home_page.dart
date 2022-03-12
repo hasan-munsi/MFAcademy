@@ -84,10 +84,12 @@ class HomePage extends StatelessWidget {
                 value: DrawerOptions.cadetList,
                 child: Xarvis.genericText(text: "Cadet List", textColor: Xarvis.appBgColor),
               ),
+              if(_user?.role==1)
               PopupMenuItem<DrawerOptions>(
                 value: DrawerOptions.notificationList,
                 child: Xarvis.genericText(text: "Notification List", textColor: Xarvis.appBgColor),
               ),
+              if(_user?.role==2)
               PopupMenuItem<DrawerOptions>(
                 value: DrawerOptions.attendanceList,
                 child: Xarvis.genericText(text: "Attendance List", textColor: Xarvis.appBgColor),
@@ -119,7 +121,9 @@ class HomePage extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Xarvis.getGlobalButton(action: () {}, child: Xarvis.genericText(text: "Read more", textColor: Xarvis.fair)),
+                child: Xarvis.getGlobalButton(action: () {},
+                    height: 35,
+                    child: Xarvis.genericText(text: "Read more", textColor: Xarvis.fair, fontSize: 12)),
               ),
               Xarvis.customHeight(20),
               Row(

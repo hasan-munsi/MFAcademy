@@ -22,12 +22,26 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getToken();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await FirebaseMessaging.instance.requestPermission(alert: true, announcement: true, badge: true, carPlay: true, criticalAlert: true, sound: true);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
+  NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+  } else {
+  }
+
   runApp(const MyApp());
 }
 
@@ -55,10 +69,15 @@ class _MyAppState extends State<MyApp> {
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
         titleText: Xarvis.genericText(text: message.notification?.title ?? "", textColor: Xarvis.appBgColor, fontWeight: FontWeight.bold, fontSize: 14),
         messageText: Xarvis.genericText(text: message.notification?.body ?? "", textColor: Xarvis.appBgColor, fontSize: 14),
+        onTap: (sb){
+          if(Get.isSnackbarOpen){
+            Get.closeAllSnackbars();
+          }
+          Get.toNamed(NotificationsList.id);
+        }
       );
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      Xarvis.showToaster(message: message.notification?.body ?? "");
     });
     super.initState();
   }

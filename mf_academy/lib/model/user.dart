@@ -11,6 +11,9 @@ class User {
   String? email;
   String? password;
   int? status;
+  ///1=User
+  ///2=Admin
+  ///3=
   int? role;
 
   User({this.id, this.name, this.rollNo, this.regNo, this.fatherName, this.motherName, this.phoneNo, this.fatherPhnNo, this.address, this.email, this.password, this.status, this.role});

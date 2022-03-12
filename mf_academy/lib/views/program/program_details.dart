@@ -60,6 +60,7 @@ class _ProgramDetailsState extends State<ProgramDetails> {
                         action: () {
                           Get.to(() => GlobalPdfViewer(url: _data?["attachment"]["file_path"] ?? ""));
                         },
+                        height: 35,
                         child: SizedBox(
                           width: double.infinity,
                           child: Center(child: Xarvis.genericText(text: "Show PDF", textColor: Xarvis.fair)),

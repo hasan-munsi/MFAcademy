@@ -81,48 +81,65 @@ class _NotificationsListState extends State<NotificationsList> {
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ..._notifications.map(
-                (e) => InkWell(
-                  onTap: () {
-                    Get.to(() => NotificationDetails(
-                          id: e.id,
-                        ));
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Xarvis.genericText(text: e.title, maxLines: 2, fontWeight: e.isRead ? FontWeight.normal : FontWeight.bold),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Xarvis.genericText(text: "Date: ${e.date}", textColor: Xarvis.appBgColor, fontSize: 12),
-                              ),
-                            ],
+        child: RefreshIndicator(
+          onRefresh: () async{
+            _init = true;
+            page = 1;
+            _noMoreData = false;
+            _notifications.clear();
+            setState(() {});
+            didChangeDependencies();
+          },
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ..._notifications.map(
+                  (e) => InkWell(
+                    onTap: () {
+                      Get.to(() => NotificationDetails(
+                            id: e.id,
+                          ));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Xarvis.genericText(text: e.title, maxLines: 2, fontWeight: e.isRead ? FontWeight.normal : FontWeight.bold),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Xarvis.genericText(text: "Date: ${e.date}", textColor: Xarvis.appBgColor, fontSize: 12),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const Icon(Icons.chevron_right),
-                      ],
+                          const Icon(Icons.chevron_right),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (_init)
-                const SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(),
-                ),
-            ],
+                if (_init)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Xarvis.appBgColor,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

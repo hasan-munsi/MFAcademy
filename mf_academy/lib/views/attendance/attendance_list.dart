@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mf_academy/controllers/student_controller.dart';
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/model/student.dart';
 import 'package:mf_academy/views/attendance/single_student_attendance.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class AttendanceList extends StatefulWidget {
   static const String id = "/AttendanceList";
@@ -42,7 +44,14 @@ class _AttendanceListState extends State<AttendanceList> {
         title: Xarvis.genericText(text: "Attendance", textColor: Xarvis.appBgColor, fontSize: 20, fontWeight: FontWeight.bold),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async{
+              await showMonthPicker(
+                  context: context,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime.now(),
+                  initialDate: DateTime.now(),
+                );
+            },
             icon: const Icon(
               Icons.calendar_today_outlined,
               color: Xarvis.dark,

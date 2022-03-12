@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mf_academy/controllers/attendance.dart';
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/model/attendance.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class SingleStudentAttendance extends StatefulWidget {
   static const String id = "/SingleStudentAttendance";
@@ -9,7 +10,8 @@ class SingleStudentAttendance extends StatefulWidget {
   const SingleStudentAttendance({Key? key}) : super(key: key);
 
   @override
-  State<SingleStudentAttendance> createState() => _SingleStudentAttendanceState();
+  State<SingleStudentAttendance> createState() =>
+      _SingleStudentAttendanceState();
 }
 
 class _SingleStudentAttendanceState extends State<SingleStudentAttendance> {
@@ -37,10 +39,21 @@ class _SingleStudentAttendanceState extends State<SingleStudentAttendance> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Xarvis.genericText(text: "Attendance Details", textColor: Xarvis.appBgColor, fontSize: 20, fontWeight: FontWeight.bold),
+        title: Xarvis.genericText(
+            text: "Attendance Details",
+            textColor: Xarvis.appBgColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await showMonthPicker(
+                context: context,
+                firstDate: DateTime(2000),
+                lastDate: DateTime.now(),
+                initialDate: DateTime.now(),
+              );
+            },
             icon: const Icon(
               Icons.calendar_today_outlined,
               color: Xarvis.dark,
@@ -54,8 +67,16 @@ class _SingleStudentAttendanceState extends State<SingleStudentAttendance> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Xarvis.genericText(text: "Arup K Bose", textColor: Xarvis.appBgColor, fontWeight: FontWeight.bold, fontSize: 24),
-            Xarvis.genericText(text: "March 2022", textColor: Xarvis.dark, fontWeight: FontWeight.bold, fontSize: 20),
+            Xarvis.genericText(
+                text: "Arup K Bose",
+                textColor: Xarvis.appBgColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 24),
+            Xarvis.genericText(
+                text: "March 2022",
+                textColor: Xarvis.dark,
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
             Expanded(
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
@@ -65,7 +86,10 @@ class _SingleStudentAttendanceState extends State<SingleStudentAttendance> {
                 ),
                 itemBuilder: (context, int i) => Container(
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: _attendances[i].isPresent ? Colors.blue.withOpacity(0.5) : Xarvis.appBgColor.withOpacity(0.5)),
+                  decoration: BoxDecoration(
+                      color: _attendances[i].isPresent
+                          ? Colors.blue.withOpacity(0.5)
+                          : Xarvis.appBgColor.withOpacity(0.5)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -73,8 +97,16 @@ class _SingleStudentAttendanceState extends State<SingleStudentAttendance> {
                       Xarvis.genericText(text: _attendances[i].day),
                       Container(
                         padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: _attendances[i].isPresent ? Colors.blue : Xarvis.appBgColor),
-                        child: Xarvis.genericText(text: _attendances[i].isPresent ? "Present" : "Absent", textColor: Xarvis.fair),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: _attendances[i].isPresent
+                                ? Colors.blue
+                                : Xarvis.appBgColor),
+                        child: Xarvis.genericText(
+                            text: _attendances[i].isPresent
+                                ? "Present"
+                                : "Absent",
+                            textColor: Xarvis.fair),
                       ),
                     ],
                   ),

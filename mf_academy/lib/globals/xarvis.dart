@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,8 @@ class Xarvis {
 
   static const Color dark = Color(0xFF000000);
   static const Color fair = Color(0xFFFFFFFF);
-  static const Color appBgColor = Color(0xFF94020F);
+  static const Color appBgColor = Color(0xFF700610);
+  static const Color appBgColorLight = Color(0xFFff0017);
 
   static User? loggedInUser;
 
@@ -89,13 +89,33 @@ class Xarvis {
     double? width,
     double? height,
   }) {
-    return ElevatedButton(
-      onPressed: action,
-      style: ButtonStyle(
-          padding: MaterialStateProperty.all(padding),
-          backgroundColor: MaterialStateProperty.all(appBgColor),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)))),
-      child: child,
+    return Container(
+      height: height,
+      width: width,
+      padding: EdgeInsets.zero,
+      margin: const EdgeInsets.all(0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            appBgColorLight,
+            appBgColor,
+          ]
+        ),
+      ),
+      child: ElevatedButton(
+        onPressed: action,
+        style: ButtonStyle(
+          visualDensity: VisualDensity.compact,
+            padding: MaterialStateProperty.all(padding),
+            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            shadowColor: MaterialStateProperty.all(Colors.transparent),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)))),
+
+        child: child,
+      ),
     );
   }
 

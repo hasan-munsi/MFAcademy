@@ -52,7 +52,7 @@ class CustomHTTPRequests {
       final _data = json.decode(_response.body);
       Xarvis.logger.i(_data);
       if (isSuccess(_data)) {
-        return _data;
+        return _data["data"];
       } else {
         Xarvis.showToaster(message: _data["message"]);
       }
