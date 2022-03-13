@@ -1,1 +1,1 @@
-enum DrawerOptions { homepage, programList, cadetList, notificationList, attendanceList, login, logout }
+enum DrawerOptions { homepage, programList, cadetList, resultList, noticeList, notificationList, attendanceList, login, logout }

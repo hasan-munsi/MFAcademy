@@ -79,9 +79,45 @@ class CustomHTTPRequests {
     }
   }
 
+  static Future resultList(int page) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/result-list?per_page=100&page=$page");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on result list: $e");
+    }
+  }
+
+  static Future noticeList(int page) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/notice-list?per_page=100&page=$page");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on notice list: $e");
+    }
+  }
+
   static Future programDetails(int id) async {
     try {
-      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/program/1");
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/program/$id");
       final _response = await client.get(_uri, headers: await getHeaderWithToken());
 
       final _data = json.decode(_response.body);
@@ -94,6 +130,42 @@ class CustomHTTPRequests {
       }
     } catch (e) {
       Xarvis.showToaster(message: "Something wrong on program details: $e");
+    }
+  }
+
+  static Future resultDetails(int id) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/result/$id");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on result details: $e");
+    }
+  }
+
+  static Future noticeDetails(int id) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/notice/$id");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on notice details: $e");
     }
   }
 

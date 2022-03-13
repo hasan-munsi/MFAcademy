@@ -9,8 +9,11 @@ import 'package:mf_academy/views/attendance/single_student_attendance.dart';
 import 'package:mf_academy/views/auth/login.dart';
 import 'package:mf_academy/views/home/home_page.dart';
 import 'package:mf_academy/views/loader/loader.dart';
+import 'package:mf_academy/views/notice/notice_list.dart';
+import 'package:mf_academy/views/notice/notice_list.dart';
 import 'package:mf_academy/views/notifications/notifications_list.dart';
 import 'package:mf_academy/views/program/program_list.dart';
+import 'package:mf_academy/views/result/result_list.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -97,6 +100,8 @@ class _MyAppState extends State<MyApp> {
         Login.id: (context) => const Login(),
         HomePage.id: (context) => HomePage(),
         ProgramList.id: (context) => const ProgramList(),
+        ResultList.id: (context) => const ResultList(),
+        NoticeList.id: (context) => const NoticeList(),
         NotificationsList.id: (context) => const NotificationsList(),
         AttendanceList.id: (context) => const AttendanceList(),
         SingleStudentAttendance.id: (context) => const SingleStudentAttendance(),
