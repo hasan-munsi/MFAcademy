@@ -128,9 +128,9 @@ class SingleProgramPreviewUI extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Xarvis.genericText(
-                text: program.title, fontWeight: FontWeight.bold, maxLines: 2),
+                text: program.title.capitalize??"", fontWeight: FontWeight.bold, maxLines: 2),
             Xarvis.genericText(
-              text: program.description,
+              text: program.description.capitalizeFirst??"",
               fontWeight: FontWeight.bold,
               maxLines: 3,
               fontSize: 12,

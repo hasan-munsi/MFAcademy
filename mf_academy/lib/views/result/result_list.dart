@@ -131,9 +131,9 @@ class SingleResultPreviewUI extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Xarvis.genericText(
-                text: resultPreview.title, fontWeight: FontWeight.bold, maxLines: 2),
+                text: resultPreview.title.capitalize??"", fontWeight: FontWeight.bold, maxLines: 2),
             Xarvis.genericText(
-              text: resultPreview.description,
+              text: resultPreview.description.capitalizeFirst??"",
               fontWeight: FontWeight.bold,
               maxLines: 3,
               fontSize: 12,

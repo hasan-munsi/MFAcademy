@@ -34,14 +34,17 @@ class HomePage extends StatelessWidget {
             Xarvis.customWidth(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Xarvis.genericText(
-                    text: "MARINE FISHERIES", textColor: Xarvis.appBgColor),
+                    text: "MARINE FISHERIES", textColor: Xarvis.appBgColor,
+                height: 1),
                 Xarvis.genericText(
                   text: "ACADEMY",
-                  textColor: Xarvis.appBgColor,
+                  textColor: Xarvis.appBgColorLight,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
+                  height: 1,
                 ),
               ],
             ),
@@ -139,101 +142,107 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Xarvis.genericText(
-                text: Xarvis.homeText,
-                maxLines: 15,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Xarvis.getGlobalButton(
-                    action: () async {
-                      Get.dialog(
-                        Scaffold(
-                          backgroundColor: Colors.transparent,
-                          body: Center(
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.9,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Xarvis.fair,
-                              ),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      physics: const BouncingScrollPhysics(),
-                                      child: Xarvis.genericText(
-                                        text: Xarvis.homeText,
-                                        maxLines: 10000
-                                      ),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    Xarvis.genericText(
+                      text: Xarvis.homeText,
+                      maxLines: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Xarvis.getGlobalButton(
+                          action: () async {
+                            Get.dialog(
+                              Scaffold(
+                                backgroundColor: Colors.transparent,
+                                body: Center(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height * 0.9,
+                                    width: MediaQuery.of(context).size.width * 0.9,
+                                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Xarvis.fair,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            physics: const BouncingScrollPhysics(),
+                                            child: Xarvis.genericText(
+                                                text: Xarvis.homeText,
+                                                maxLines: 10000
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: TextButton(onPressed: (){
+                                            Get.back();
+                                          }, child: Xarvis.genericText(text: "Okay", textColor: Xarvis.appBgColorLight)),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(onPressed: (){
-                                      Get.back();
-                                    }, child: Xarvis.genericText(text: "Okay", textColor: Xarvis.appBgColorLight)),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    height: 35,
-                    child: Xarvis.genericText(
-                        text: "Read more",
-                        textColor: Xarvis.fair,
-                        fontSize: 12)),
+                            );
+                          },
+                          height: 35,
+                          child: Xarvis.genericText(
+                              text: "Read more",
+                              textColor: Xarvis.fair,
+                              fontSize: 12)),
+                    ),
+                  ],
+                ),
               ),
-              Xarvis.customHeight(20),
-              Row(
-                children: [
-                  Expanded(
-                    child: LoginHelpingButtonsUI(
-                        label: "Follow Facebook Page",
-                        imageUrl: "assets/images/facebook.png",
-                        action: () {
-                          Get.to(() => const GlobalWebView(
-                              url:
-                                  "https://www.facebook.com/mfacademy.gov.bd"));
-                        }),
-                  ),
-                  Xarvis.customWidth(5),
-                  Expanded(
-                    child: LoginHelpingButtonsUI(
-                        label: "24/7 Helpline",
-                        imageUrl: "assets/images/whatsapp.png",
-                        action: () async {
-                          if (await canLaunch("https://wa.me")) {
-                            await launch("https://wa.me");
-                          } else {
-                            Xarvis.showToaster(
-                                message: "Could not open WhatsApp");
-                          }
-                        }),
-                  ),
-                  Xarvis.customWidth(5),
-                  Expanded(
-                    child: LoginHelpingButtonsUI(
-                        label: "Our Website",
-                        imageUrl: "assets/images/globe.png",
-                        action: () {
-                          Get.to(() => const GlobalWebView(
-                              url: "https://www.mfacademy.gov.bd/"));
-                        }),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+
+            Row(
+              children: [
+                Expanded(
+                  child: LoginHelpingButtonsUI(
+                      label: "Facebook Page",
+                      imageUrl: "assets/images/facebook.png",
+                      action: () {
+                        Get.to(() => const GlobalWebView(
+                            url:
+                                "https://www.facebook.com/mfacademy.gov.bd"));
+                      }),
+                ),
+                Xarvis.customWidth(5),
+                Expanded(
+                  child: LoginHelpingButtonsUI(
+                      label: "24/7 Helpline",
+                      imageUrl: "assets/images/whatsapp.png",
+                      action: () async {
+                        if (await canLaunch("https://wa.me")) {
+                          await launch("https://wa.me");
+                        } else {
+                          Xarvis.showToaster(
+                              message: "Could not open WhatsApp");
+                        }
+                      }),
+                ),
+                Xarvis.customWidth(5),
+                Expanded(
+                  child: LoginHelpingButtonsUI(
+                      label: "Our Website",
+                      imageUrl: "assets/images/globe.png",
+                      action: () {
+                        Get.to(() => const GlobalWebView(
+                            url: "https://www.mfacademy.gov.bd/"));
+                      }),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

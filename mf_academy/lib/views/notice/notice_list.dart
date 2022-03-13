@@ -129,9 +129,9 @@ class SingleNoticePreviewUI extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Xarvis.genericText(
-                text: noticePreview.title, fontWeight: FontWeight.bold, maxLines: 2),
+                text: noticePreview.title.capitalize??"", fontWeight: FontWeight.bold, maxLines: 2),
             Xarvis.genericText(
-              text: noticePreview.description,
+              text: noticePreview.description.capitalizeFirst??"",
               fontWeight: FontWeight.bold,
               maxLines: 3,
               fontSize: 12,
