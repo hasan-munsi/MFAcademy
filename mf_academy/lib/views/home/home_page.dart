@@ -95,11 +95,6 @@ class HomePage extends StatelessWidget {
                 child: Xarvis.genericText(
                     text: "Program List", textColor: Xarvis.appBgColor),
               ),
-              PopupMenuItem<DrawerOptions>(
-                value: DrawerOptions.cadetList,
-                child: Xarvis.genericText(
-                    text: "Cadet List", textColor: Xarvis.appBgColor),
-              ),
               if (_user?.role == 1)
                 PopupMenuItem<DrawerOptions>(
                   value: DrawerOptions.notificationList,
@@ -149,10 +144,17 @@ class HomePage extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset("assets/images/banner.jpeg", width: double.infinity, height: 200, fit: BoxFit.cover,)),
+                    Xarvis.customHeight(10),
+
                     Xarvis.genericText(
                       text: Xarvis.homeText,
-                      maxLines: 20,
+                      maxLines: 5,
                     ),
+                    Xarvis.customHeight(10),
+
                     Align(
                       alignment: Alignment.centerRight,
                       child: Xarvis.getGlobalButton(
@@ -222,15 +224,19 @@ class HomePage extends StatelessWidget {
                       label: "24/7 Helpline",
                       imageUrl: "assets/images/whatsapp.png",
                       action: () async {
-                        if (await canLaunch("https://wa.me")) {
-                          await launch("https://wa.me");
+                        if (await canLaunch("https://wa.me/+8801571721910?text=Hi")) {
+                          await launch("https://wa.me/+8801571721910?text=Hi");
                         } else {
                           Xarvis.showToaster(
                               message: "Could not open WhatsApp");
                         }
                       }),
                 ),
-                Xarvis.customWidth(5),
+              ],
+            ),
+            Xarvis.customHeight(10),
+            Row(
+              children: [
                 Expanded(
                   child: LoginHelpingButtonsUI(
                       label: "Our Website",
@@ -238,6 +244,16 @@ class HomePage extends StatelessWidget {
                       action: () {
                         Get.to(() => const GlobalWebView(
                             url: "https://www.mfacademy.gov.bd/"));
+                      }),
+                ),
+                Xarvis.customWidth(5),
+                Expanded(
+                  child: LoginHelpingButtonsUI(
+                      label: "My Government BD",
+                      imageUrl: "assets/images/globe.png",
+                      action: () {
+                        Get.to(() => const GlobalWebView(
+                            url: "https://www.mygov.bd/"));
                       }),
                 ),
               ],

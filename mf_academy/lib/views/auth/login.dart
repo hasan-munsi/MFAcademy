@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: [
                       Xarvis.customHeight(20),
-                      Xarvis.getTextField(controller: _emailC, hint: 'Username or Email'),
+                      Xarvis.getTextField(controller: _emailC, hint: 'Username or Phone Number'),
                       Xarvis.customHeight(20),
                       Xarvis.getTextField(
                         controller: _passC,
@@ -102,10 +102,12 @@ class _LoginState extends State<Login> {
                         children: [
                           Expanded(
                             child: LoginHelpingButtonsUI(
-                                label: "Follow Facebook Page",
+                                label: "Facebook Page",
                                 imageUrl: "assets/images/facebook.png",
                                 action: () {
-                                  Get.to(() => const GlobalWebView(url: "https://www.facebook.com/mfacademy.gov.bd"));
+                                  Get.to(() => const GlobalWebView(
+                                      url:
+                                      "https://www.facebook.com/mfacademy.gov.bd"));
                                 }),
                           ),
                           Xarvis.customWidth(5),
@@ -114,20 +116,36 @@ class _LoginState extends State<Login> {
                                 label: "24/7 Helpline",
                                 imageUrl: "assets/images/whatsapp.png",
                                 action: () async {
-                                  if (await canLaunch("https://wa.me")) {
-                                    await launch("https://wa.me");
+                                  if (await canLaunch("https://wa.me/+8801571721910?text=Hi")) {
+                                    await launch("https://wa.me/+8801571721910?text=Hi");
                                   } else {
-                                    Xarvis.showToaster(message: "Could not open WhatsApp");
+                                    Xarvis.showToaster(
+                                        message: "Could not open WhatsApp");
                                   }
                                 }),
                           ),
-                          Xarvis.customWidth(5),
+                        ],
+                      ),
+                      Xarvis.customHeight(10),
+                      Row(
+                        children: [
                           Expanded(
                             child: LoginHelpingButtonsUI(
                                 label: "Our Website",
                                 imageUrl: "assets/images/globe.png",
                                 action: () {
-                                  Get.to(() => const GlobalWebView(url: "https://www.mfacademy.gov.bd/"));
+                                  Get.to(() => const GlobalWebView(
+                                      url: "https://www.mfacademy.gov.bd/"));
+                                }),
+                          ),
+                          Xarvis.customWidth(5),
+                          Expanded(
+                            child: LoginHelpingButtonsUI(
+                                label: "My Government BD",
+                                imageUrl: "assets/images/globe.png",
+                                action: () {
+                                  Get.to(() => const GlobalWebView(
+                                      url: "https://www.mygov.bd/"));
                                 }),
                           ),
                         ],
