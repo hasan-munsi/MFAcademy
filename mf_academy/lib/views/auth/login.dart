@@ -6,6 +6,7 @@ import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/http/custom_http_requests.dart';
 import 'package:mf_academy/views/global_views/webview.dart';
 import 'package:mf_academy/views/loader/loader.dart';
+import 'package:mf_academy/views/utils/social_buttons.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -98,58 +99,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       Xarvis.customHeight(20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: LoginHelpingButtonsUI(
-                                label: "Facebook Page",
-                                imageUrl: "assets/images/facebook.png",
-                                action: () {
-                                  Get.to(() => const GlobalWebView(
-                                      url:
-                                      "https://www.facebook.com/mfacademy.gov.bd"));
-                                }),
-                          ),
-                          Xarvis.customWidth(5),
-                          Expanded(
-                            child: LoginHelpingButtonsUI(
-                                label: "24/7 Helpline",
-                                imageUrl: "assets/images/whatsapp.png",
-                                action: () async {
-                                  if (await canLaunch("https://wa.me/+8801571721910?text=Hi")) {
-                                    await launch("https://wa.me/+8801571721910?text=Hi");
-                                  } else {
-                                    Xarvis.showToaster(
-                                        message: "Could not open WhatsApp");
-                                  }
-                                }),
-                          ),
-                        ],
-                      ),
-                      Xarvis.customHeight(10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: LoginHelpingButtonsUI(
-                                label: "Our Website",
-                                imageUrl: "assets/images/globe.png",
-                                action: () {
-                                  Get.to(() => const GlobalWebView(
-                                      url: "https://www.mfacademy.gov.bd/"));
-                                }),
-                          ),
-                          Xarvis.customWidth(5),
-                          Expanded(
-                            child: LoginHelpingButtonsUI(
-                                label: "My Government BD",
-                                imageUrl: "assets/images/globe.png",
-                                action: () {
-                                  Get.to(() => const GlobalWebView(
-                                      url: "https://www.mygov.bd/"));
-                                }),
-                          ),
-                        ],
-                      ),
+                      const SocialButtons(),
                     ],
                   ),
                 ),
@@ -222,7 +172,7 @@ class LoginHelpingButtonsUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Xarvis.getGlobalButton(
       action: action,
-      height: 35,
+      height: 45,
       child: SizedBox(
         height: 35,
         child: Row(
@@ -238,7 +188,7 @@ class LoginHelpingButtonsUI extends StatelessWidget {
             ),
             Xarvis.customWidth(5),
             Expanded(
-              child: Xarvis.genericText(text: label, textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 10, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
+              child: Xarvis.genericText(text: label, textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 14, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
             ),
           ],
         ),

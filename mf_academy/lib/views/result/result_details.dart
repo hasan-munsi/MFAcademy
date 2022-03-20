@@ -56,6 +56,7 @@ class _ResultDetailsState extends State<ResultDetails> {
                     Xarvis.genericText(text: _data?["title"] ?? "", fontSize: 20, fontWeight: FontWeight.bold, maxLines: 5),
                     Xarvis.genericText(text: _data?["publish_at"] ?? "", textColor: Colors.blue),
                     Xarvis.genericText(text: _data?["description"] ?? "", maxLines: 500),
+                    if((_data?["attachment"]?["file_path"]??false)!=false)
                     Xarvis.getGlobalButton(
                         action: () {
                           Get.to(() => GlobalPdfViewer(url: _data?["attachment"]["file_path"] ?? ""));

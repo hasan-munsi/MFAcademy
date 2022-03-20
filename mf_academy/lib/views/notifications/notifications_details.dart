@@ -53,7 +53,7 @@ class _NotificationDetailsState extends State<NotificationDetails> {
                   Xarvis.genericText(text: _data?["title"] ?? "", fontSize: 20, fontWeight: FontWeight.bold, maxLines: 5),
                   Xarvis.genericText(text: "Date: ${_data?["sent_at"].toString().split("T")[0]}", textColor: Colors.blue),
                   Xarvis.genericText(text: _data?["body"] ?? "", maxLines: 50),
-                  if(_data?["attachment"]?["file_path"]!=null)
+                  if((_data?["attachment"]?["file_path"]??false)!=false)
                   Xarvis.getGlobalButton(
                       action: () {
                         Get.to(() => GlobalPdfViewer(url: _data?["attachment"]["file_path"] ?? ""));

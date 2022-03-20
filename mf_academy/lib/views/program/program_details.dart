@@ -56,6 +56,7 @@ class _ProgramDetailsState extends State<ProgramDetails> {
                     Xarvis.genericText(text: _data?["program_name"] ?? "", fontSize: 20, fontWeight: FontWeight.bold, maxLines: 5),
                     Xarvis.genericText(text: _data?["publish_at"] ?? "", textColor: Colors.blue),
                     Xarvis.genericText(text: _data?["program_description"] ?? "", maxLines: 500),
+                    if((_data?["attachment"]?["file_path"]??false)!=false)
                     Xarvis.getGlobalButton(
                         action: () {
                           Get.to(() => GlobalPdfViewer(url: _data?["attachment"]["file_path"] ?? ""));
@@ -64,7 +65,8 @@ class _ProgramDetailsState extends State<ProgramDetails> {
                         child: SizedBox(
                           width: double.infinity,
                           child: Center(child: Xarvis.genericText(text: "Show PDF", textColor: Xarvis.fair)),
-                        ))
+                        )
+                    )
                   ],
                 ),
               ),

@@ -15,7 +15,7 @@
         </intent>
     </queries>
    <application
-        android:label="MF Academy"
+        android:label="MFAcademy"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

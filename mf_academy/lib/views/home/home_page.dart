@@ -10,6 +10,7 @@ import 'package:mf_academy/views/notice/notice_list.dart';
 import 'package:mf_academy/views/notifications/notifications_list.dart';
 import 'package:mf_academy/views/program/program_list.dart';
 import 'package:mf_academy/views/result/result_list.dart';
+import 'package:mf_academy/views/utils/social_buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
@@ -93,31 +94,29 @@ class HomePage extends StatelessWidget {
               PopupMenuItem<DrawerOptions>(
                 value: DrawerOptions.programList,
                 child: Xarvis.genericText(
-                    text: "Program List", textColor: Xarvis.appBgColor),
+                    text: "Program", textColor: Xarvis.appBgColor),
               ),
-              if (_user?.role == 1)
-                PopupMenuItem<DrawerOptions>(
-                  value: DrawerOptions.notificationList,
-                  child: Xarvis.genericText(
-                      text: "Notification List", textColor: Xarvis.appBgColor),
-                ),
-              if (_user?.role == 1)
                 PopupMenuItem<DrawerOptions>(
                   value: DrawerOptions.resultList,
                   child: Xarvis.genericText(
-                      text: "Result List", textColor: Xarvis.appBgColor),
+                      text: "Result", textColor: Xarvis.appBgColor),
                 ),
-              if (_user?.role == 1)
                 PopupMenuItem<DrawerOptions>(
                   value: DrawerOptions.noticeList,
                   child: Xarvis.genericText(
-                      text: "Notice List", textColor: Xarvis.appBgColor),
+                      text: "Notice", textColor: Xarvis.appBgColor),
                 ),
+                  if (_user?.role == 1 || _user?.role == 3)
+                    PopupMenuItem<DrawerOptions>(
+                      value: DrawerOptions.notificationList,
+                      child: Xarvis.genericText(
+                          text: "Notification", textColor: Xarvis.appBgColor),
+                    ),
               if (_user?.role == 2)
                 PopupMenuItem<DrawerOptions>(
                   value: DrawerOptions.attendanceList,
                   child: Xarvis.genericText(
-                      text: "Attendance List", textColor: Xarvis.appBgColor),
+                      text: "Attendance", textColor: Xarvis.appBgColor),
                 ),
               if (_user == null)
                 PopupMenuItem<DrawerOptions>(
@@ -144,16 +143,41 @@ class HomePage extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
+                    Xarvis.customHeight(20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Xarvis.genericText(
+                          text: "Welcome to",
+                          textColor: Xarvis.dark,
+                          height: 1,
+                          fontSize: 24,
+                        ),
+                        Xarvis.customWidth(10),
+                        Xarvis.genericText(
+                          text: "MFA",
+                          textColor: Xarvis.appBgColorLight,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26,
+                          height: 1,
+                        ),
+                      ],
+                    ),
+                    Xarvis.customHeight(20),
                     ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.asset("assets/images/banner.jpeg", width: double.infinity, height: 200, fit: BoxFit.cover,)),
+                        child: Image.asset("assets/images/banner.jpeg", width: double.infinity, height: 200, fit: BoxFit.cover,),
+                    ),
                     Xarvis.customHeight(10),
+                    Xarvis.customHeight(20),
 
                     Xarvis.genericText(
                       text: Xarvis.homeText,
                       maxLines: 5,
                     ),
                     Xarvis.customHeight(10),
+                    Xarvis.customHeight(20),
 
                     Align(
                       alignment: Alignment.centerRight,
@@ -178,7 +202,7 @@ class HomePage extends StatelessWidget {
                                             physics: const BouncingScrollPhysics(),
                                             child: Xarvis.genericText(
                                                 text: Xarvis.homeText,
-                                                maxLines: 10000
+                                                maxLines: 10000,
                                             ),
                                           ),
                                         ),
@@ -196,6 +220,7 @@ class HomePage extends StatelessWidget {
                             );
                           },
                           height: 35,
+                          borderRadius: 50,
                           child: Xarvis.genericText(
                               text: "Read more",
                               textColor: Xarvis.fair,
@@ -205,59 +230,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
-            Row(
-              children: [
-                Expanded(
-                  child: LoginHelpingButtonsUI(
-                      label: "Facebook Page",
-                      imageUrl: "assets/images/facebook.png",
-                      action: () {
-                        Get.to(() => const GlobalWebView(
-                            url:
-                                "https://www.facebook.com/mfacademy.gov.bd"));
-                      }),
-                ),
-                Xarvis.customWidth(5),
-                Expanded(
-                  child: LoginHelpingButtonsUI(
-                      label: "24/7 Helpline",
-                      imageUrl: "assets/images/whatsapp.png",
-                      action: () async {
-                        if (await canLaunch("https://wa.me/+8801571721910?text=Hi")) {
-                          await launch("https://wa.me/+8801571721910?text=Hi");
-                        } else {
-                          Xarvis.showToaster(
-                              message: "Could not open WhatsApp");
-                        }
-                      }),
-                ),
-              ],
-            ),
-            Xarvis.customHeight(10),
-            Row(
-              children: [
-                Expanded(
-                  child: LoginHelpingButtonsUI(
-                      label: "Our Website",
-                      imageUrl: "assets/images/globe.png",
-                      action: () {
-                        Get.to(() => const GlobalWebView(
-                            url: "https://www.mfacademy.gov.bd/"));
-                      }),
-                ),
-                Xarvis.customWidth(5),
-                Expanded(
-                  child: LoginHelpingButtonsUI(
-                      label: "My Government BD",
-                      imageUrl: "assets/images/globe.png",
-                      action: () {
-                        Get.to(() => const GlobalWebView(
-                            url: "https://www.mygov.bd/"));
-                      }),
-                ),
-              ],
-            ),
+            const SizedBox(
+              height: 120,
+              child: SocialButtons(),
+            )
           ],
         ),
       ),

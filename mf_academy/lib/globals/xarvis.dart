@@ -21,19 +21,33 @@ class Xarvis {
 
   static final logger = Logger();
 
-  static const homeText = """1971 - As part of the Foreign Reconstruction of the Great War of Liberation of 1971, the then Bangladesh Government Attorney Councilors were hired to make the port of Chittagong suitable for the port of Chittagong before the removal of large and decommissioned / half-built ships and explosive mines. The experts observed the movement of huge fishery resources in the Bay of Bengal and expressed interest in extracting them. Following this, in 1973, the Russian government provided 10 fishing trawlers (including officers, sailors and experts) to the then government of Bangladesh for extraction of fishery resources in the Bay of Bengal. The Marine Fisheries Academy was established in 1973 by the then government under the leadership of Bangabandhu Sheikh Mujibur Rahman, the father of the Sonejati, with the technical assistance of the Russian government, so that the trawlers could be operated by local trained manpower in the future. At present, this academy is one of the recognized maritime educational institutions recognized by the Ministry of Shipping. Since 2016, the cadets of the Department of Nautical and Marine Engineering of the academy have been receiving the required Seaman Book / CDC (Continuous Discharge Certificate) from the Department of Shipping to avail job opportunities in the shipping vessels. Moreover, in 2016, the academy was affiliated to Bangabandhu Sheikh Mujibur Rahman Maritime University and the course curriculum has been developed for 4 years B.Sc Honors level. This has increased the acceptability of Academy Certificates and created diversified job opportunities for the passed cadets.
-Vision. Human resource development through conducting vocational training / education activities in the maritime sector.
-Objectives. To meet the demand of our people for animal meat, to enrich the economy of the country through earning foreign currency and socio-economic development.
+  static const homeText = """1971 - As part of the Foreign Reconstruction of the Great War of Liberation of 1971, the then Bangladesh Government Attorney Councilors were hired to make the port of Chittagong suitable for the port of Chittagong before the removal of large and decommissioned / half-built ships and explosive mines. The experts observed the movement of huge fishery resources in the Bay of Bengal and expressed interest in extracting them.
+  
+Following this, in 1973, the Russian government provided 10 fishing trawlers (including officers, sailors and experts) to the then government of Bangladesh for extraction of fishery resources in the Bay of Bengal. The Marine Fisheries Academy was established in 1973 by the then government under the leadership of Bangabandhu Sheikh Mujibur Rahman, the father of the Sonejati, with the technical assistance of the Russian government, so that the trawlers could be operated by local trained manpower in the future.
+
+At present, this academy is one of the recognized maritime educational institutions recognized by the Ministry of Shipping. Since 2016, the cadets of the Department of Nautical and Marine Engineering of the academy have been receiving the required Seaman Book / CDC (Continuous Discharge Certificate) from the Department of Shipping to avail job opportunities in the shipping vessels. Moreover, in 2016, the academy was affiliated to Bangabandhu Sheikh Mujibur Rahman Maritime University and the course curriculum has been developed for 4 years B.Sc Honors level. This has increased the acceptability of Academy Certificates and created diversified job opportunities for the passed cadets.
+
+Vision.
+Human resource development through conducting vocational training / education activities in the maritime sector.
+
+Objectives.
+To meet the demand of our people for animal meat, to enrich the economy of the country through earning foreign currency and socio-economic development.
+
 Goals and Objectives.
-1.	Conducting pre-sea training and undergraduate training activities to build skilled manpower for deep sea fishing vessels / trawlers and naval commercial vessels, ship engine operations, shipbuilding and repair industries, fish processing and quality control industries and other related sectors.
-2.	Provide ancillary training to naval officers and sailors on basic maritime security and other essentials.
-3.	Conduct refresher courses for preparation of Certificate of Competency Examination for officers engaged in Ocean Fishing / Trawler Naval Commercial Ships.
+
+1. Conducting pre-sea training and undergraduate training activities to build skilled manpower for deep sea fishing vessels / trawlers and naval commercial vessels, ship engine operations, shipbuilding and repair industries, fish processing and quality control industries and other related sectors.
+
+2. Provide ancillary training to naval officers and sailors on basic maritime security and other essentials.
+
+3. Conduct refresher courses for preparation of Certificate of Competency Examination for officers engaged in Ocean Fishing / Trawler Naval Commercial Ships.
+
 Main functions.
-1.	Admission of 35 student cadets in Nautical Department, 35 students in Marine Engineering Department and 20 local student cadets in Marine Fisheries Department on batch basis in each academic year and admission of 10 foreign cadets in these 3 departments subject to admission.
 
-2.	According to the syllabus and academic calendar approved by the Department of Shipping, 2 (two) years Mayor's Pre-Sea Training Course and as per the syllabus approved by Bangabandhu Sheikh Mujibur Rahman Maritime University, 4 years term / BSc in Nautical Studies / BSc in Marine Engineering (B.Sc.) Conduct simultaneous education courses in Marine Fisheries.
+1. Admission of 35 student cadets in Nautical Department, 35 students in Marine Engineering Department and 20 local student cadets in Marine Fisheries Department on batch basis in each academic year and admission of 10 foreign cadets in these 3 departments subject to admission.
 
-3.	Taking exams and publishing results in semester system etc.
+2. According to the syllabus and academic calendar approved by the Department of Shipping, 2 (two) years Mayor's Pre-Sea Training Course and as per the syllabus approved by Bangabandhu Sheikh Mujibur Rahman Maritime University, 4 years term / BSc in Nautical Studies / BSc in Marine Engineering (B.Sc.) Conduct simultaneous education courses in Marine Fisheries.
+
+3. Taking exams and publishing results in semester system etc.
 """;
 
   static void showToaster({required String message, bool danger = false}) {
@@ -103,6 +117,7 @@ Main functions.
     EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
     double? width,
     double? height,
+    double borderRadius = 5,
   }) {
     return Container(
       height: height,
@@ -110,7 +125,7 @@ Main functions.
       padding: EdgeInsets.zero,
       margin: const EdgeInsets.all(0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(borderRadius),
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
