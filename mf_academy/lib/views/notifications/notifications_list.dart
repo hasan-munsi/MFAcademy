@@ -104,16 +104,22 @@ class _NotificationsListState extends State<NotificationsList> {
                           ));
                     },
                     child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Xarvis.appBgColor.withOpacity(0.5)),
+                        ),
+                      ),
                       child: Row(
                         children: [
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Xarvis.genericText(text: e.title, maxLines: 2, fontWeight: e.isRead ? FontWeight.normal : FontWeight.bold),
+                                Xarvis.genericText(text: e.title.capitalize??"", maxLines: 2, fontWeight: e.isRead ? FontWeight.normal : FontWeight.bold),
                                 Align(
-                                  alignment: Alignment.centerRight,
+                                  alignment: Alignment.centerLeft,
                                   child: Xarvis.genericText(text: "Date: ${e.date}", textColor: Xarvis.appBgColor, fontSize: 12),
                                 ),
                               ],

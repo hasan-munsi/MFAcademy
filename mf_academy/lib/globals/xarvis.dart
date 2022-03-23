@@ -50,6 +50,9 @@ Main functions.
 3. Taking exams and publishing results in semester system etc.
 """;
 
+  static const visionText = "Human resource development through conducting vocational training/education activities in the mari-time sector";
+  static const objectivesText = "To meet the demand of our people for animal meat, to enrich the economy of the country through earning foreign currency and socio-economic development";
+
   static void showToaster({required String message, bool danger = false}) {
     Fluttertoast.showToast(msg: message, backgroundColor: danger ? appBgColor : dark);
   }

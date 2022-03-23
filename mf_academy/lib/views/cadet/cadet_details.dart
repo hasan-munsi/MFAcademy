@@ -5,15 +5,15 @@ import 'package:mf_academy/http/custom_http_requests.dart';
 import 'package:mf_academy/views/utils/pdf_viewer.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class ResultDetails extends StatefulWidget {
-  final int resultId;
-  const ResultDetails({Key? key, required this.resultId}) : super(key: key);
+class CadetDetails extends StatefulWidget {
+  final int cadetId;
+  const CadetDetails({Key? key, required this.cadetId}) : super(key: key);
 
   @override
-  State<ResultDetails> createState() => _ResultDetailsState();
+  State<CadetDetails> createState() => _CadetDetailsState();
 }
 
-class _ResultDetailsState extends State<ResultDetails> {
+class _CadetDetailsState extends State<CadetDetails> {
   bool _init = true;
 
   dynamic _data;
@@ -21,7 +21,7 @@ class _ResultDetailsState extends State<ResultDetails> {
   @override
   void didChangeDependencies() async {
     if (_init) {
-      _data = await CustomHTTPRequests.resultDetails(widget.resultId);
+      _data = await CustomHTTPRequests.cadetDetails(widget.cadetId);
       _data = _data["data"];
       if (mounted) {
         setState(() {
@@ -39,11 +39,11 @@ class _ResultDetailsState extends State<ResultDetails> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Xarvis.genericText(text: "Result Details", textColor: Xarvis.appBgColor, fontSize: 20, fontWeight: FontWeight.bold),
+          title: Xarvis.genericText(text: "Cadet Details", textColor: Xarvis.appBgColor, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         body: Container(
           padding: const EdgeInsets.all(10),
-          child: _init?const Center(child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator(),),):Card(
+          child: Card(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(10),
@@ -65,7 +65,8 @@ class _ResultDetailsState extends State<ResultDetails> {
                         child: SizedBox(
                           width: double.infinity,
                           child: Center(child: Xarvis.genericText(text: "Show PDF", textColor: Xarvis.fair)),
-                        ))
+                        )
+                    )
                   ],
                 ),
               ),

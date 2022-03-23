@@ -57,7 +57,7 @@ class SocialButtons extends StatelessWidget {
             Xarvis.customWidth(15),
             Expanded(
               child: LoginHelpingButtonsUI(
-                  label: "My Govt. BD",
+                  label: "My Gov",
                   imageUrl: "assets/images/globe.png",
                   action: () {
                     Get.to(() => const GlobalWebView(

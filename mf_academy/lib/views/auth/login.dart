@@ -188,7 +188,7 @@ class LoginHelpingButtonsUI extends StatelessWidget {
             ),
             Xarvis.customWidth(5),
             Expanded(
-              child: Xarvis.genericText(text: label, textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 14, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
+              child: Xarvis.genericText(text: label.toUpperCase(), textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 14, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
             ),
           ],
         ),

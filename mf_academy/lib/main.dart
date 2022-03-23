@@ -7,6 +7,7 @@ import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/views/attendance/attendance_list.dart';
 import 'package:mf_academy/views/attendance/single_student_attendance.dart';
 import 'package:mf_academy/views/auth/login.dart';
+import 'package:mf_academy/views/cadet/cadet_list.dart';
 import 'package:mf_academy/views/home/home_page.dart';
 import 'package:mf_academy/views/loader/loader.dart';
 import 'package:mf_academy/views/notice/notice_list.dart';

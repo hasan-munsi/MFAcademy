@@ -79,6 +79,24 @@ class CustomHTTPRequests {
     }
   }
 
+  static Future cadetList(int type, int page) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/cadet-info/$type?per_page=100&page=$page");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on cadet list: $e");
+    }
+  }
+
   static Future resultList(int page) async {
     try {
       final Uri _uri = Uri.parse("${Xarvis.kApiURL}/result-list?per_page=100&page=$page");
@@ -130,6 +148,24 @@ class CustomHTTPRequests {
       }
     } catch (e) {
       Xarvis.showToaster(message: "Something wrong on program details: $e");
+    }
+  }
+
+  static Future cadetDetails(int id) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/cadet-info/$id/details");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on cadet details: $e");
     }
   }
 

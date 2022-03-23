@@ -43,7 +43,7 @@ class _ProgramDetailsState extends State<ProgramDetails> {
         ),
         body: Container(
           padding: const EdgeInsets.all(10),
-          child: Card(
+          child: _init?const Center(child: SizedBox(width: 50, height: 50, child: CircularProgressIndicator(),),):Card(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(10),
