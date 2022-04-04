@@ -13,10 +13,10 @@ class NoticePreview {
 
   factory NoticePreview.fromJSON(dynamic data) {
     return NoticePreview(
-      id: data["id"],
-      title: data["title"],
-      description: data["description"],
-      date: data["publish_at"],
+      id: data["id"]??0,
+      title: data["title"]??"",
+      description: data["description"]??"",
+      date: data["publish_at"]??"",
     );
   }
 }

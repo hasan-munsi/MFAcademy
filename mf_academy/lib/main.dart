@@ -8,6 +8,8 @@ import 'package:mf_academy/views/attendance/attendance_list.dart';
 import 'package:mf_academy/views/attendance/single_student_attendance.dart';
 import 'package:mf_academy/views/auth/login.dart';
 import 'package:mf_academy/views/cadet/cadet_list.dart';
+import 'package:mf_academy/views/cadet_doc/cadet_doc_list.dart';
+import 'package:mf_academy/views/cadet_doc/cadet_doc_list.dart';
 import 'package:mf_academy/views/home/home_page.dart';
 import 'package:mf_academy/views/loader/loader.dart';
 import 'package:mf_academy/views/notice/notice_list.dart';
@@ -106,6 +108,7 @@ class _MyAppState extends State<MyApp> {
         NotificationsList.id: (context) => const NotificationsList(),
         AttendanceList.id: (context) => const AttendanceList(),
         SingleStudentAttendance.id: (context) => const SingleStudentAttendance(),
+        CadetDocList.id: (context) => const CadetDocList(),
       },
     );
   }

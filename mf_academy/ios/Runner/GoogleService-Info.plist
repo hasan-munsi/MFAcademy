@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>673974128164-flkjp1vulv6143m703og53ddg96u8f3n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.673974128164-flkjp1vulv6143m703og53ddg96u8f3n</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCb43GtG7nFE3EBgI2dbEFGU8kARkLw3tk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>673974128164</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.bcs.mfacademy</string>
+	<key>PROJECT_ID</key>
+	<string>marine-fisheries-academy-test</string>
+	<key>STORAGE_BUCKET</key>
+	<string>marine-fisheries-academy-test.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:673974128164:ios:fc1b86d670a855abfd52b1</string>
+</dict>
+</plist>

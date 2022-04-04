@@ -14,9 +14,9 @@ class ResultPreview {
   factory ResultPreview.fromJSON(dynamic data) {
     return ResultPreview(
       id: data["id"],
-      title: data["title"],
-      description: data["description"],
-      date: data["publish_at"],
+      title: data["title"]??"",
+      description: data["description"]??"",
+      date: data["publish_at"]??"",
     );
   }
 }

@@ -21,6 +21,9 @@ class Xarvis {
 
   static final logger = Logger();
 
+  static const kBMFAWarriorsAppId = "com.bmfacadets.warriors";
+  static const kSafetyGPSProAppId = "com.safetygps.track";
+
   static const homeText = """1971 - As part of the Foreign Reconstruction of the Great War of Liberation of 1971, the then Bangladesh Government Attorney Councilors were hired to make the port of Chittagong suitable for the port of Chittagong before the removal of large and decommissioned / half-built ships and explosive mines. The experts observed the movement of huge fishery resources in the Bay of Bengal and expressed interest in extracting them.
   
 Following this, in 1973, the Russian government provided 10 fishing trawlers (including officers, sailors and experts) to the then government of Bangladesh for extraction of fishery resources in the Bay of Bengal. The Marine Fisheries Academy was established in 1973 by the then government under the leadership of Bangabandhu Sheikh Mujibur Rahman, the father of the Sonejati, with the technical assistance of the Russian government, so that the trawlers could be operated by local trained manpower in the future.
@@ -100,10 +103,20 @@ Main functions.
     String? hint,
     bool obscureText = false,
     Widget? suffix,
+    String? Function(String? val)? validator,
+    int maxLine = 1,
+    int maxLength = 200,
+    TextInputType keyboardType = TextInputType.text,
+    Function(String val)? onChange,
   }) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      validator: validator,
+      maxLines: maxLine,
+      maxLength: maxLength,
+      keyboardType: keyboardType,
+      onChanged: onChange,
       decoration: InputDecoration(
         hintText: hint,
         suffix: suffix,

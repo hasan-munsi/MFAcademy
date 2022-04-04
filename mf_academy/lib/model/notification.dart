@@ -14,7 +14,7 @@ class SingleNotification {
   factory SingleNotification.fromJSON(dynamic data) {
     return SingleNotification(
       id: data["data"]["id"].toString(),
-      title: data["data"]["title"],
+      title: data["data"]?["title"]??"",
       date: data["created_at"].toString().split("T")[0],
       isRead: data["read_at"] != null,
     );

@@ -13,10 +13,10 @@ class ProgramPreview {
 
   factory ProgramPreview.fromJSON(dynamic data) {
     return ProgramPreview(
-      id: data["id"],
-      title: data["program_name"],
-      description: data["program_description"],
-      date: data["publish_at"],
+      id: data["id"]??0,
+      title: data["program_name"]??"",
+      description: data["program_description"]??"",
+      date: data["publish_at"]??"",
     );
   }
 }

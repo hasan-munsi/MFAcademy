@@ -17,6 +17,7 @@ class CustomHTTPRequests {
   static Future<Map<String, String>> getHeaderWithToken() async {
     SharedPreferences _sharedPrefs = await SharedPreferences.getInstance();
     final String _token = _sharedPrefs.getString("token") ?? "";
+    Xarvis.logger.i(_token);
     return {"Accept": "application/json", "Content-Type": "application/json", "Authorization": _token};
   }
 
@@ -115,6 +116,24 @@ class CustomHTTPRequests {
     }
   }
 
+  static Future docList(int page) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/cadet-doc-list?per_page=100&page=$page");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on doc list: $e");
+    }
+  }
+
   static Future noticeList(int page) async {
     try {
       final Uri _uri = Uri.parse("${Xarvis.kApiURL}/notice-list?per_page=100&page=$page");
@@ -184,6 +203,24 @@ class CustomHTTPRequests {
       }
     } catch (e) {
       Xarvis.showToaster(message: "Something wrong on result details: $e");
+    }
+  }
+
+  static Future cadetDocDetails(int id) async {
+    try {
+      final Uri _uri = Uri.parse("${Xarvis.kApiURL}/cadet-doc/$id");
+      final _response = await client.get(_uri, headers: await getHeaderWithToken());
+
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(await getHeaderWithToken());
+      Xarvis.logger.i(_data);
+      if (isSuccess(_data)) {
+        return _data;
+      } else {
+        Xarvis.showToaster(message: _data["message"]);
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on cadet doc details: $e");
     }
   }
 

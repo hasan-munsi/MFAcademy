@@ -1,3 +1,4 @@
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:mf_academy/model/user.dart';
 import 'package:mf_academy/views/attendance/attendance_list.dart';
 import 'package:mf_academy/views/auth/login.dart';
 import 'package:mf_academy/views/cadet/cadet_list.dart';
+import 'package:mf_academy/views/cadet_doc/cadet_doc_list.dart';
 import 'package:mf_academy/views/global_views/webview.dart';
 import 'package:mf_academy/views/notice/notice_list.dart';
 import 'package:mf_academy/views/notifications/notifications_list.dart';
@@ -56,7 +58,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
         actions: [
-          PopupMenuButton<DrawerOptions>(
+          /*PopupMenuButton<DrawerOptions>(
             onSelected: (DrawerOptions result) {
               switch (result) {
                 case DrawerOptions.login:
@@ -104,70 +106,248 @@ class HomePage extends StatelessWidget {
             itemBuilder: (BuildContext context) =>
                 <PopupMenuEntry<DrawerOptions>>[
               PopupMenuItem<DrawerOptions>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 value: DrawerOptions.homepage,
-                child: Xarvis.genericText(
-                    text: "Home Page", textColor: Xarvis.appBgColor),
+                child: PopUpMenuItemChildDesign(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Xarvis.genericText(
+                          text: Xarvis.loggedInUser?.name ?? "No name",
+                          textColor: Xarvis.appBgColor,
+                          fontWeight: FontWeight.bold),
+                      Xarvis.genericText(
+                          text: Xarvis.loggedInUser?.phoneNo ?? "No phone",
+                          textColor: Xarvis.appBgColor,
+                          fontSize: 14),
+                    ],
+                  ),
+                ),
               ),
               PopupMenuItem<DrawerOptions>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                value: DrawerOptions.homepage,
+                child: PopUpMenuItemChildDesign(
+                  child: Xarvis.genericText(
+                      text: "Home Page", textColor: Xarvis.appBgColor),
+                ),
+              ),
+              PopupMenuItem<DrawerOptions>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 value: DrawerOptions.noticeList,
-                child: Xarvis.genericText(
-                    text: "General Notice", textColor: Xarvis.appBgColor),
+                child: PopUpMenuItemChildDesign(
+                  child: Xarvis.genericText(
+                      text: "General Notice", textColor: Xarvis.appBgColor),
+                ),
               ),
               PopupMenuItem<DrawerOptions>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 value: DrawerOptions.programList,
-                child: Xarvis.genericText(
-                    text: "Program List", textColor: Xarvis.appBgColor),
+                child: PopUpMenuItemChildDesign(
+                  child: Xarvis.genericText(
+                      text: "Program List", textColor: Xarvis.appBgColor),
+                ),
               ),
               if (_user != null)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.cadetList,
-                  child: Xarvis.genericText(
-                      text: "Cadet List", textColor: Xarvis.appBgColor),
+                  child: PopUpMenuItemChildDesign(
+                    child: Xarvis.genericText(
+                        text: "Cadet List", textColor: Xarvis.appBgColor),
+                  ),
                 ),
               PopupMenuItem<DrawerOptions>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 value: DrawerOptions.officerAdminList,
-                child: Xarvis.genericText(
-                    text: "Officers and Admin List",
-                    textColor: Xarvis.appBgColor),
+                child: PopUpMenuItemChildDesign(
+                  child: Xarvis.genericText(
+                      text: "Officers and Admin List", textColor: Xarvis.appBgColor),
+                ),
               ),
               if (_user != null)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.cadetActivities,
-                  child: Xarvis.genericText(
-                      text: "Recent Cadet Activities",
-                      textColor: Xarvis.appBgColor),
+                  child: PopUpMenuItemChildDesign(
+                    child: Xarvis.genericText(
+                        text: "Recent Cadet Activities", textColor: Xarvis.appBgColor),
+                  ),
                 ),
               if (_user != null)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.resultList,
-                  child: Xarvis.genericText(
-                      text: "Cadet Results", textColor: Xarvis.appBgColor),
+                  child: PopUpMenuItemChildDesign(
+                    child: Xarvis.genericText(
+                        text: "Cadet Results", textColor: Xarvis.appBgColor),
+                  ),
                 ),
               if (_user?.role == 1 || _user?.role == 3)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.notificationList,
-                  child: Xarvis.genericText(
-                      text: "Message", textColor: Xarvis.appBgColor),
+                  child: PopUpMenuItemChildDesign(
+                    child: Xarvis.genericText(
+                        text: "Message", textColor: Xarvis.appBgColor),
+                  ),
                 ),
               if (_user?.role == 2)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.attendanceList,
-                  child: Xarvis.genericText(
-                      text: "Attendance", textColor: Xarvis.appBgColor),
+                  child: PopUpMenuItemChildDesign(
+                    child: Xarvis.genericText(
+                        text: "Attendance", textColor: Xarvis.appBgColor),
+                  ),
                 ),
               if (_user == null)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.login,
                   child: Xarvis.genericText(
                       text: "Login", textColor: Xarvis.appBgColor),
                 ),
               if (_user != null)
                 PopupMenuItem<DrawerOptions>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   value: DrawerOptions.logout,
                   child: Xarvis.genericText(
                       text: "Logout", textColor: Xarvis.appBgColor),
                 ),
             ],
+          ),*/
+          IconButton(
+            onPressed: () {
+              Get.dialog(
+                Stack(
+                  children: [
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: Card(
+                        elevation: 5,
+                        child: Container(
+                          width: Get.width*0.5,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Xarvis.fair,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Material(
+                            color: Xarvis.fair,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (_user != null)
+                                  InkWell(
+                                  onTap: (){
+                                    Get.back();
+                                  },
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Xarvis.genericText(
+                                          text: Xarvis.loggedInUser?.name ?? "No name",
+                                          textColor: Xarvis.appBgColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        Xarvis.genericText(
+                                          text: Xarvis.loggedInUser?.phoneNo ?? "No phone",
+                                          textColor: Xarvis.appBgColor,
+                                          fontSize: 14,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                if (_user != null)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                PopUpMenuSingleItemUI(label: "Homepage", onTap: (){Get.back();}),
+                                const Divider(color: Xarvis.appBgColor,),
+                                PopUpMenuSingleItemUI(label: "General Notice", onTap: (){
+                                  Get.toNamed(NoticeList.id);
+                                },),
+                                const Divider(color: Xarvis.appBgColor,),
+                                PopUpMenuSingleItemUI(label: "Program List", onTap: (){
+                                  Get.toNamed(ProgramList.id);
+                                },),
+                                const Divider(color: Xarvis.appBgColor,),
+                                if (_user != null)
+                                  PopUpMenuSingleItemUI(label: "Cadet List", onTap: (){
+                                  Get.to(() => const CadetList(type: 1));
+                                },),
+                                if (_user != null)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                PopUpMenuSingleItemUI(label: "Officers and Admin List", onTap: (){
+                                  Get.to(() => const GlobalPdfViewer(
+                                      url: "${Xarvis.kURL}/storage/employee/employee.pdf"));
+                                },),
+                                const Divider(color: Xarvis.appBgColor,),
+                                if (_user != null)
+                                  PopUpMenuSingleItemUI(label: "Recent Cadet Activities", onTap: (){
+                                  Get.to(() => const CadetList(
+                                    type: 2,
+                                    title: "Recent Cadet Activities",
+                                  ));
+                                },),
+                                if (_user != null)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                if (_user != null)
+                                  PopUpMenuSingleItemUI(label: "Cadet Results", onTap: (){
+                                  Get.toNamed(ResultList.id);
+                                },),
+                                if (_user != null)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                  PopUpMenuSingleItemUI(label: "Cadet Doc List", onTap: (){
+                                    Get.toNamed(CadetDocList.id);
+                                  },),
+                                  const Divider(color: Xarvis.appBgColor,),
+                                if (_user?.role == 1 || _user?.role == 3)
+                                  PopUpMenuSingleItemUI(label: "Message", onTap: (){
+                                  Get.toNamed(NotificationsList.id);
+                                },),
+                                if (_user?.role == 1 || _user?.role == 3)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                if (_user?.role == 2)
+                                  PopUpMenuSingleItemUI(label: "Attendance", onTap: (){
+                                  Get.toNamed(AttendanceList.id);
+                                },),
+                                if (_user?.role == 2)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                if (_user?.role == 2)
+                                  PopUpMenuSingleItemUI(label: "Safety GPS Pro", onTap: ()async{
+                                    appOpener(Xarvis.kSafetyGPSProAppId);
+                                  },),
+                                if (_user?.role == 2)
+                                  const Divider(color: Xarvis.appBgColor,),
+                                PopUpMenuSingleItemUI(label: "BMFA Warriors", onTap: ()async{
+                                  appOpener(Xarvis.kBMFAWarriorsAppId);
+                                },),
+                                  const Divider(color: Xarvis.appBgColor,),
+                                if (_user == null)
+                                  PopUpMenuSingleItemUI(label: "Login", onTap: (){
+                                  Get.toNamed(Login.id);
+                                },),
+                                if (_user != null)
+                                  PopUpMenuSingleItemUI(label: "Logout", onTap: (){
+                                  Xarvis.logoutKicker();
+                                },),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                barrierColor: Colors.transparent,
+              );
+            },
+            icon: const Icon(Icons.menu, color: Xarvis.appBgColor,),
           ),
         ],
       ),
@@ -365,6 +545,42 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  void appOpener(String appId)async{
+    try {
+      ///checks if the app is installed on your mobile device
+      bool isInstalled = await DeviceApps.isAppInstalled(appId);
+      if (isInstalled) {
+        DeviceApps.openApp(appId);
+      } else {
+        ///if the app is not installed it lunches google play store so you can install it from there
+        if(await canLaunch("market://details?id="+appId)){
+          await launch("market://details?id="+appId);
+        }
+      }
+    } catch (e) {
+      Xarvis.logger.e(e);
+    }
+  }
+
+}
+
+class PopUpMenuSingleItemUI extends StatelessWidget {
+  final String label;
+  final Function() onTap;
+  const PopUpMenuSingleItemUI({Key? key, required this.label, required this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: InkWell(
+        onTap: onTap,
+        child: Xarvis.genericText(
+            text: label, textColor: Xarvis.appBgColor),
       ),
     );
   }

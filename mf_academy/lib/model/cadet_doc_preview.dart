@@ -1,19 +1,19 @@
-class Cadet {
+class CadetDocPreview {
   final int id;
   final String title;
   final String description;
   final String date;
 
-  Cadet({
+  CadetDocPreview({
     required this.id,
     required this.title,
     required this.description,
     required this.date,
   });
 
-  factory Cadet.fromJSON(dynamic data) {
-    return Cadet(
-      id: data["id"]??0,
+  factory CadetDocPreview.fromJSON(dynamic data) {
+    return CadetDocPreview(
+      id: data["id"],
       title: data["title"]??"",
       description: data["description"]??"",
       date: data["publish_at"]??"",

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/http/custom_http_requests.dart';
-import 'package:mf_academy/views/global_views/webview.dart';
 import 'package:mf_academy/views/loader/loader.dart';
 import 'package:mf_academy/views/utils/social_buttons.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -54,7 +53,11 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Xarvis.genericText(text: "Welcome", fontSize: 30, fontWeight: FontWeight.bold, textColor: Xarvis.fair),
+                    Xarvis.genericText(
+                        text: "Welcome",
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        textColor: Xarvis.fair),
                     Image.asset(
                       "assets/images/logo.png",
                       width: 150,
@@ -73,7 +76,9 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: [
                       Xarvis.customHeight(20),
-                      Xarvis.getTextField(controller: _emailC, hint: 'Username or Phone Number'),
+                      Xarvis.getTextField(
+                          controller: _emailC,
+                          hint: 'Username or Phone Number'),
                       Xarvis.customHeight(20),
                       Xarvis.getTextField(
                         controller: _passC,
@@ -82,7 +87,9 @@ class _LoginState extends State<Login> {
                         suffix: InkWell(
                           onTap: switchEye,
                           child: Icon(
-                            _isEyeOpen ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                            _isEyeOpen
+                                ? CupertinoIcons.eye_slash
+                                : CupertinoIcons.eye,
                             size: 20,
                           ),
                         ),
@@ -94,8 +101,25 @@ class _LoginState extends State<Login> {
                           width: 250,
                           height: 50,
                           child: Center(
-                            child: Xarvis.genericText(text: "LOG IN", textColor: Xarvis.fair, textAlign: TextAlign.center, fontSize: 20),
+                            child: Xarvis.genericText(
+                                text: "LOG IN",
+                                textColor: Xarvis.fair,
+                                textAlign: TextAlign.center,
+                                fontSize: 20),
                           ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () async{
+                          await Get.dialog(
+                            const ForgetPasswordForm(),
+                          );
+                        },
+                        child: const Text(
+                          "Forget Password?",
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Xarvis.appBgColor),
                         ),
                       ),
                       Xarvis.customHeight(20),
@@ -137,16 +161,16 @@ class _LoginState extends State<Login> {
 
         Xarvis.logger.i(_response);
 
-        final SharedPreferences _sharedPrefs = await SharedPreferences.getInstance();
-        _sharedPrefs.setString("token", "Bearer ${_response["data"]["access_token"]}");
+        final SharedPreferences _sharedPrefs =
+            await SharedPreferences.getInstance();
+        _sharedPrefs.setString(
+            "token", "Bearer ${_response["data"]["access_token"]}");
 
         ///
         FirebaseMessaging fcm = FirebaseMessaging.instance;
         String? _fcmToken = await fcm.getToken();
 
-        Map<String, String> _data = {
-          "token": _fcmToken??""
-        };
+        Map<String, String> _data = {"token": _fcmToken ?? ""};
         await CustomHTTPRequests.updateToken(_data);
       } catch (e) {
         Xarvis.logger.i(e);
@@ -166,7 +190,12 @@ class LoginHelpingButtonsUI extends StatelessWidget {
   final String imageUrl;
   final Function() action;
 
-  const LoginHelpingButtonsUI({Key? key, required this.label, required this.imageUrl, required this.action}) : super(key: key);
+  const LoginHelpingButtonsUI(
+      {Key? key,
+      required this.label,
+      required this.imageUrl,
+      required this.action})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +217,14 @@ class LoginHelpingButtonsUI extends StatelessWidget {
             ),
             Xarvis.customWidth(5),
             Expanded(
-              child: Xarvis.genericText(text: label.toUpperCase(), textColor: Xarvis.fair, textAlign: TextAlign.start, fontSize: 14, height: 1, fontWeight: FontWeight.bold, maxLines: 5),
+              child: Xarvis.genericText(
+                  text: label.toUpperCase(),
+                  textColor: Xarvis.fair,
+                  textAlign: TextAlign.start,
+                  fontSize: 14,
+                  height: 1,
+                  fontWeight: FontWeight.bold,
+                  maxLines: 5),
             ),
           ],
         ),
@@ -196,3 +232,72 @@ class LoginHelpingButtonsUI extends StatelessWidget {
     );
   }
 }
+
+class ForgetPasswordForm extends StatefulWidget {
+  const ForgetPasswordForm({Key? key}) : super(key: key);
+
+  @override
+  State<ForgetPasswordForm> createState() => _ForgetPasswordFormState();
+}
+
+class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
+  final _phoneC = TextEditingController();
+  final String _mainMsg = "I forgot my password. Therefore, I am requesting to reset my password. Here is my phone number - ";
+  final _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Container(
+          width: Get.width*0.8,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Xarvis.fair,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Xarvis.genericText(text: _mainMsg+_phoneC.text, maxLines: 50),
+                Xarvis.customHeight(10),
+                Xarvis.getTextField(
+                  controller: _phoneC,
+                  maxLine: 1,
+                  maxLength: 11,
+                  keyboardType: TextInputType.number,
+                  onChange: (_){
+                    setState(() {});
+                  },
+                  validator: (String? val){
+                    return val?.trim().length!=11?"11 digit phone number required":null;
+                  },
+                ),
+                Xarvis.customHeight(10),
+                LoginHelpingButtonsUI(
+                    label: "Send Password Reset Request",
+                    imageUrl: "assets/images/whatsapp.png",
+                    action: () async {
+                      if(_formKey.currentState?.validate()??false){
+                        const String _phoneNumber = "+8801557636857";
+                        if (await canLaunch("https://wa.me/$_phoneNumber?text=${_mainMsg+_phoneC.text}")) {
+                          // ০১৫৫৭৬৩৬৮৫৭
+                          await launch("https://wa.me/$_phoneNumber?text=${_mainMsg+_phoneC.text}");
+                          Get.back();
+                        } else {
+                          Xarvis.showToaster(
+                              message: "Could not open WhatsApp");
+                        }
+                      }
+                    }),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
