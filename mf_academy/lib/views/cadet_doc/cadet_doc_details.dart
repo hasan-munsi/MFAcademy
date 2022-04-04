@@ -6,8 +6,8 @@ import 'package:mf_academy/views/utils/pdf_viewer.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CadetDocDetails extends StatefulWidget {
-  final int resultId;
-  const CadetDocDetails({Key? key, required this.resultId}) : super(key: key);
+  final int cadetDocId;
+  const CadetDocDetails({Key? key, required this.cadetDocId}) : super(key: key);
 
   @override
   State<CadetDocDetails> createState() => _CadetDocDetailsState();
@@ -21,7 +21,7 @@ class _CadetDocDetailsState extends State<CadetDocDetails> {
   @override
   void didChangeDependencies() async {
     if (_init) {
-      _data = await CustomHTTPRequests.resultDetails(widget.resultId);
+      _data = await CustomHTTPRequests.cadetDocDetails(widget.cadetDocId);
       _data = _data["data"];
       if (mounted) {
         setState(() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mf_academy/controllers/cadet_doc_preview.dart';
 import 'package:mf_academy/globals/xarvis.dart';
+import 'package:mf_academy/views/cadet_doc/cadet_doc_details.dart';
 import 'package:mf_academy/views/result/result_details.dart';
 
 import '../../model/cadet_doc_preview.dart';
@@ -144,7 +145,7 @@ class SingleCadetDocPreviewUI extends StatelessWidget {
                     textColor: Xarvis.appBgColor),
                 Xarvis.getGlobalButton(
                     action: () {
-                      Get.to(() => ResultDetails(resultId: cadetDocPreview.id));
+                      Get.to(() => CadetDocDetails(cadetDocId: cadetDocPreview.id));
                     },
                     height: 30,
                     child: Xarvis.genericText(
