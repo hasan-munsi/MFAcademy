@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:mf_academy/http/custom_http_requests.dart';
 import 'package:mf_academy/model/user.dart';
@@ -23,6 +24,44 @@ class Xarvis {
 
   static const kBMFAWarriorsAppId = "com.bmfacadets.warriors";
   static const kSafetyGPSProAppId = "com.safetygps.track";
+
+  ///30 Mar, 2022 (Sun) to DateTime
+  static DateTime getStringToDateTime1(String stringedDate){
+    try{
+      return DateFormat("dd MMM, yyyy (EEE)").parse(stringedDate);
+    }catch(e){
+      return DateTime.now();
+    }
+  }
+
+  ///DateTime to 30 Mar, 2022
+  static String getDateTimeToString1(DateTime dateTime){
+    try{
+      return DateFormat("dd MMM, yyyy (EEE)").format(dateTime);
+    }catch(e){
+      return "";
+    }
+  }
+
+  ///2020-03-30 to 30 Mar, 2022 (Sun)
+  static String getStringToStringDate1(String stringedDate){
+    try{
+      DateTime dateTime = DateFormat("yyyy-MM-dd").parse(stringedDate);
+      return DateFormat("dd MMM, yyyy (EEE)").format(dateTime);
+    }catch(e){
+      return "";
+    }
+  }
+
+  ///2020-03-30 to 30 Mar, 2022
+  static String getStringToStringTime1(String stringedDate){
+    try{
+      DateTime dateTime = DateFormat("HH:mm:ss").parse(stringedDate);
+      return DateFormat("hh:mm:ss a").format(dateTime);
+    }catch(e){
+      return "";
+    }
+  }
 
   static const homeText = """1971 - As part of the Foreign Reconstruction of the Great War of Liberation of 1971, the then Bangladesh Government Attorney Councilors were hired to make the port of Chittagong suitable for the port of Chittagong before the removal of large and decommissioned / half-built ships and explosive mines. The experts observed the movement of huge fishery resources in the Bay of Bengal and expressed interest in extracting them.
   

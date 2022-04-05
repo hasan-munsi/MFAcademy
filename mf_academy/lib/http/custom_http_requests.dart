@@ -331,4 +331,30 @@ class CustomHTTPRequests {
       Xarvis.showToaster(message: "Something wrong on token update: $e");
     }
   }
+
+  static Future loadAttendanceInfo() async {
+    try {
+      final Uri _uri = Uri.parse("https://rumytechnologies.com/rams/json_api");
+      final _response = await client.post(_uri, headers: getDefaultHeader(), body: json.encode({
+        "operation" : "fetch_log",
+        "auth_user": "mfa",
+        "auth_code": "87sf86djhhj545shbsdndhdfjdf655d",
+        "start_date": "2022-03-30",
+        "end_date":"2022-04-01",
+        "start_time": "06:49:09",
+        "end_time": "23:00:00"
+      }));
+
+      Xarvis.logger.i(_response.body);
+      final _data = json.decode(_response.body);
+      Xarvis.logger.i(_data);
+      if (_data?["log"]!=null) {
+        return _data['log'];
+      } else {
+        Xarvis.showToaster(message: "Load attendance info error");
+      }
+    } catch (e) {
+      Xarvis.showToaster(message: "Something wrong on token update: $e");
+    }
+  }
 }

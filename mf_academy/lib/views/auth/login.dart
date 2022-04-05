@@ -50,18 +50,35 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
                   children: [
-                    Xarvis.genericText(
-                        text: "Welcome",
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        textColor: Xarvis.fair),
-                    Image.asset(
-                      "assets/images/logo.png",
-                      width: 150,
-                      height: 150,
+                    SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Xarvis.genericText(
+                              text: "Welcome",
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              textColor: Xarvis.fair),
+                          Image.asset(
+                            "assets/images/logo.png",
+                            width: 150,
+                            height: 150,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top: 40,
+                        left: 20,
+                        child: InkWell(
+                          onTap: (){
+                            Get.back();
+                          },
+                            child: const Icon(Icons.chevron_left, color: Xarvis.fair,),),
                     ),
                   ],
                 ),

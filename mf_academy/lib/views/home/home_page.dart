@@ -323,10 +323,10 @@ class HomePage extends StatelessWidget {
                                   },),
                                 if (_user?.role == 2)
                                   const Divider(color: Xarvis.appBgColor,),
-                                PopUpMenuSingleItemUI(label: "BMFA Warriors", onTap: ()async{
-                                  appOpener(Xarvis.kBMFAWarriorsAppId);
-                                },),
-                                  const Divider(color: Xarvis.appBgColor,),
+                                // PopUpMenuSingleItemUI(label: "BMFA Warriors", onTap: ()async{
+                                //   appOpener(Xarvis.kBMFAWarriorsAppId);
+                                // },),
+                                //   const Divider(color: Xarvis.appBgColor,),
                                 if (_user == null)
                                   PopUpMenuSingleItemUI(label: "Login", onTap: (){
                                   Get.toNamed(Login.id);
