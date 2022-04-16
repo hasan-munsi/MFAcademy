@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/http/custom_http_requests.dart';
 import 'package:mf_academy/model/single_attendance.dart';
@@ -7,9 +8,10 @@ class NewAttendanceController{
 
   List<SingleAttendance> get attendances=>_attendances;
 
-  Future loadAttendance()async{
-    final _response = await CustomHTTPRequests.loadAttendanceInfo();
+  Future loadAttendance(DateTimeRange range)async{
+    final _response = await CustomHTTPRequests.loadAttendanceInfo(range);
     if(_response!=false){
+      _attendances.clear();
       for(final attendance in _response){
         _attendances.add(SingleAttendance.fromJson(attendance));
       }

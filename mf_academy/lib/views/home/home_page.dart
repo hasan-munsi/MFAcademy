@@ -1,15 +1,12 @@
 import 'package:device_apps/device_apps.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mf_academy/globals/enums.dart';
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:mf_academy/model/user.dart';
 import 'package:mf_academy/views/attendance/attendance_list.dart';
 import 'package:mf_academy/views/auth/login.dart';
 import 'package:mf_academy/views/cadet/cadet_list.dart';
 import 'package:mf_academy/views/cadet_doc/cadet_doc_list.dart';
-import 'package:mf_academy/views/global_views/webview.dart';
 import 'package:mf_academy/views/notice/notice_list.dart';
 import 'package:mf_academy/views/notifications/notifications_list.dart';
 import 'package:mf_academy/views/program/program_list.dart';
@@ -311,17 +308,20 @@ class HomePage extends StatelessWidget {
                                 },),
                                 if (_user?.role == 1 || _user?.role == 3)
                                   const Divider(color: Xarvis.appBgColor,),
-                                if (_user?.role == 2)
+                                if (_user?.role == 2 || _user?.role == 4)
                                   PopUpMenuSingleItemUI(label: "Attendance", onTap: (){
                                   Get.toNamed(AttendanceList.id);
                                 },),
                                 if (_user?.role == 2)
                                   const Divider(color: Xarvis.appBgColor,),
-                                if (_user?.role == 2)
-                                  PopUpMenuSingleItemUI(label: "Safety GPS Pro", onTap: ()async{
-                                    appOpener(Xarvis.kSafetyGPSProAppId);
-                                  },),
-                                if (_user?.role == 2)
+                                if (_user?.role == 2 && GetPlatform.isAndroid)
+                                  PopUpMenuSingleItemUI(
+                                    label: "Safety GPS Pro",
+                                    onTap: ()async{
+                                      appOpener(Xarvis.kSafetyGPSProAppId);
+                                    },
+                                  ),
+                                if (_user?.role == 2  && GetPlatform.isAndroid)
                                   const Divider(color: Xarvis.appBgColor,),
                                 // PopUpMenuSingleItemUI(label: "BMFA Warriors", onTap: ()async{
                                 //   appOpener(Xarvis.kBMFAWarriorsAppId);

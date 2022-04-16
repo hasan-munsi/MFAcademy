@@ -43,6 +43,15 @@ class Xarvis {
     }
   }
 
+  ///DateTime to 2022-04-01
+  static String getDateTimeToString2(DateTime dateTime){
+    try{
+      return DateFormat("yyyy-MM-dd").format(dateTime);
+    }catch(e){
+      return "";
+    }
+  }
+
   ///2020-03-30 to 30 Mar, 2022 (Sun)
   static String getStringToStringDate1(String stringedDate){
     try{
@@ -162,6 +171,7 @@ Main functions.
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
+        counter: const SizedBox(),
       ),
     );
   }

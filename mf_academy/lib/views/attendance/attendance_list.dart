@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mf_academy/controllers/new_attendance.dart';
-import 'package:mf_academy/controllers/student_controller.dart';
 import 'package:mf_academy/globals/xarvis.dart';
-import 'package:mf_academy/model/attendance.dart';
-import 'package:mf_academy/model/student.dart';
-import 'package:mf_academy/views/attendance/single_student_attendance.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:mf_academy/views/attendance/date_pick_dialogue.dart';
 
 import '../../model/single_attendance.dart';
 
@@ -27,10 +23,12 @@ class _AttendanceListState extends State<AttendanceList> {
   final List<SingleAttendance> _attendances = [];
   final List<String> _dates = [];
 
+  DateTimeRange _selectedRange = DateTimeRange(start: DateTime.now().subtract(const Duration(days: 6)), end: DateTime.now());
+
   @override
   void didChangeDependencies() async {
     if (_init) {
-      await _attendanceController.loadAttendance();
+      await _attendanceController.loadAttendance(_selectedRange);
       _attendances.addAll(_attendanceController.attendances);
       _dates.addAll(_attendanceController.getDates());
       if (mounted) {
@@ -52,11 +50,34 @@ class _AttendanceListState extends State<AttendanceList> {
             textColor: Xarvis.appBgColor,
             fontSize: 20,
             fontWeight: FontWeight.bold),
+        actions: [
+          IconButton(
+            onPressed: ()async{
+              final DateTimeRange? range = await Get.dialog(const DatePickDialogue());
+              if(range==null){
+                return;
+              }
+              else if(range.end.difference(range.start).inDays==6){
+                _selectedRange = range;
+                setState(() {
+                  _init = true;
+                  didChangeDependencies();
+                });
+              }else{
+                Xarvis.showToaster(message: 'Exactly 7 days must be chosen');
+              }
+            },
+            icon: const Icon(Icons.calendar_today),),
+        ],
       ),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(10),
-        child: ListView.builder(
+        child: _init?Center(
+          child: Xarvis.genericText(text: 'Loading...'),
+        ):_dates.isEmpty?Center(
+          child: Xarvis.genericText(text: 'No attendance found'),
+        ):ListView.builder(
           physics: const BouncingScrollPhysics(),
           itemCount: _dates.length,
           itemBuilder: (context, int i) => SingleDateAttendancesUI(

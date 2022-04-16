@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mf_academy/globals/xarvis.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -332,20 +333,26 @@ class CustomHTTPRequests {
     }
   }
 
-  static Future loadAttendanceInfo() async {
+  static Future loadAttendanceInfo(DateTimeRange range) async {
     try {
       final Uri _uri = Uri.parse("https://rumytechnologies.com/rams/json_api");
       final _response = await client.post(_uri, headers: getDefaultHeader(), body: json.encode({
         "operation" : "fetch_log",
         "auth_user": "mfa",
         "auth_code": "87sf86djhhj545shbsdndhdfjdf655d",
-        "start_date": "2022-03-30",
-        "end_date":"2022-04-01",
-        "start_time": "06:49:09",
-        "end_time": "23:00:00"
+        "start_date": Xarvis.getDateTimeToString2(range.start),
+        "end_date": Xarvis.getDateTimeToString2(range.end),
+        "start_time": "00:00:01",
+        "end_time": "23:59:59"
       }));
 
-      Xarvis.logger.i(_response.body);
+      Xarvis.logger.i({"operation" : "fetch_log",
+          "auth_user": "mfa",
+          "auth_code": "87sf86djhhj545shbsdndhdfjdf655d",
+          "start_date": Xarvis.getDateTimeToString2(range.start),
+    "end_date": Xarvis.getDateTimeToString2(range.end),
+    "start_time": "00:00:01",
+    "end_time": "23:59:59"});
       final _data = json.decode(_response.body);
       Xarvis.logger.i(_data);
       if (_data?["log"]!=null) {
